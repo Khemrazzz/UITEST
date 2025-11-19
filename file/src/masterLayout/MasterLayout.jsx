@@ -145,7 +145,7 @@ const MasterLayout = ({ children }) => {
                     className={pathname === "/" ? "active-page" : ""}
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />
-                    AI
+                    ZapEx Flow
                   </Link>
                 </li>
                 <li>
