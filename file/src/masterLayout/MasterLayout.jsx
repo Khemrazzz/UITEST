@@ -90,6 +90,13 @@ const MasterLayout = ({ children }) => {
     setMobileMenu(!mobileMenu);
   };
 
+  const isActive = (target) => {
+    if (target === "/") {
+      return pathname === "/";
+    }
+    return pathname === target || pathname.startsWith(`${target}/`);
+  };
+
   return (
     <section className={mobileMenu ? "overlay active" : "overlay "}>
       {/* sidebar */}
@@ -236,6 +243,103 @@ const MasterLayout = ({ children }) => {
                   >
                     <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
                     Finance & Banking
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className='menu-title text-uppercase text-muted small mt-3'>
+              User
+            </li>
+            <li className='dropdown'>
+              <Link href='#'>
+                <Icon icon='solar:users-group-rounded-outline' className='menu-icon' />
+                <span>ZapEx Hub</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+                <li>
+                  <Link href='/dashboard' className={isActive("/dashboard") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/wallets' className={isActive("/wallets") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Wallets
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/kyc/submit' className={isActive("/kyc") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/trading/markets' className={isActive("/trading") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trading
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/profile' className={isActive("/profile") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/security' className={isActive("/security") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Security
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/activity' className={isActive("/activity") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Activity
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className='menu-title text-uppercase text-muted small mt-3'>
+              Admin
+            </li>
+            <li className='dropdown'>
+              <Link href='#'>
+                <Icon icon='solar:shield-user-outline' className='menu-icon' />
+                <span>Console</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+                <li>
+                  <Link href='/admin/dashboard' className={isActive("/admin/dashboard") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Admin Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/users' className={isActive("/admin/users") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Users
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/kyc/queue' className={isActive("/admin/kyc") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC Queue
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/wallets' className={isActive("/admin/wallets") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Wallets
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/trades' className={isActive("/admin/trades") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trades
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/payments' className={isActive("/admin/payments") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Payments
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/settings' className={isActive("/admin/settings") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Settings
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/admin/audit-logs' className={isActive("/admin/audit-logs") ? "active-page" : ""}>
+                    <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Audit Logs
                   </Link>
                 </li>
               </ul>
