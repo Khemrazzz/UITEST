@@ -6,7 +6,7 @@ import Link from "next/link";
 const PageShell = ({ title, subtitle, breadcrumb = [], children, actions }) => {
   return (
     <MasterLayout>
-      <div className='px-24 py-24'>
+      <div className='dashboard-main px-24 py-24'>
         <div className='d-flex flex-wrap justify-content-between gap-3 align-items-start mb-24'>
           <div>
             <p className='text-uppercase text-muted small mb-1'>ZapEx</p>
@@ -24,7 +24,7 @@ const PageShell = ({ title, subtitle, breadcrumb = [], children, actions }) => {
                 Home
               </Link>
             </li>
-            {breadcrumb.map((item) => (
+            {breadcrumb.map((item, index) => (
               <li key={item.href ?? item.label} className='d-flex align-items-center gap-2'>
                 <span>/</span>
                 {item.href ? (
