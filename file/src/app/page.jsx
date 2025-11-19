@@ -1,11 +1,10 @@
-import DashBoardLayerOne from "@/components/DashBoardLayerOne";
 import MasterLayout from "@/masterLayout/MasterLayout";
-import { Breadcrumb } from "react-bootstrap";
+import ZapexFlowPlayground from "@/components/zapex/ZapexFlowPlayground";
 
 export const metadata = {
-  title: "WowDash NEXT JS - Admin Dashboard Multipurpose Bootstrap 5 Template",
+  title: "ZapEx Experience Lab",
   description:
-    "Wowdash NEXT JS is a developer-friendly, ready-to-use admin template designed for building attractive, scalable, and high-performing web applications.",
+    "Interactive sandbox that maps every ZapEx user story to tangible UI slices across authentication, wallets, trading, and admin ops.",
 };
 
 const Page = () => {
@@ -13,11 +12,7 @@ const Page = () => {
     <>
       {/* MasterLayout */}
       <MasterLayout>
-        {/* Breadcrumb */}
-        <Breadcrumb title='AI' />
-
-        {/* DashBoardLayerOne */}
-        <DashBoardLayerOne />
+        <ZapexFlowPlayground />
       </MasterLayout>
     </>
   );
