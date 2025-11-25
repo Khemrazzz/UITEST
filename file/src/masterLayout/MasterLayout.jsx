@@ -4,12 +4,16 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { usePathname } from "next/navigation";
 import ThemeToggleButton from "../helper/ThemeToggleButton";
 import Link from "next/link";
+import { useZapex } from "@/components/zapex/context/ZapexContext";
 
 const MasterLayout = ({ children }) => {
   let pathname = usePathname();
   let [sidebarActive, seSidebarActive] = useState(false);
   let [mobileMenu, setMobileMenu] = useState(false);
   const location = usePathname(); // Hook to get the current route
+  const { currentUser } = useZapex();
+  const isAuthenticated = !!currentUser?.isAuthenticated;
+  const isAdmin = currentUser?.role === "Admin" || currentUser?.role === "Compliance";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -252,103 +256,126 @@ const MasterLayout = ({ children }) => {
                 </li>
               </ul>
             </li>
-            <li className='menu-title text-uppercase text-muted small mt-3'>
-              User
-            </li>
-            <li className='dropdown'>
-              <Link href='#'>
-                <Icon icon='solar:users-group-rounded-outline' className='menu-icon' />
-                <span>ZapEx Hub</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-                <li>
-                  <Link href='/dashboard' className={isActive("/dashboard") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Dashboard
+            {isAuthenticated ? (
+              <>
+                <li className='menu-title text-uppercase text-muted small mt-3'>
+                  User
+                </li>
+                <li className='dropdown'>
+                  <Link href='#'>
+                    <Icon icon='solar:users-group-rounded-outline' className='menu-icon' />
+                    <span>ZapEx Hub</span>
                   </Link>
+                  <ul className='sidebar-submenu'>
+                    <li>
+                      <Link href='/dashboard' className={isActive("/dashboard") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/wallets' className={isActive("/wallets") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Wallets
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/kyc/submit' className={isActive("/kyc") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/trading/markets' className={isActive("/trading") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trading
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/profile' className={isActive("/profile") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/security' className={isActive("/security") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Security
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/activity' className={isActive("/activity") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Activity
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className='menu-title text-uppercase text-muted small mt-3'>
+                  User
                 </li>
                 <li>
-                  <Link href='/wallets' className={isActive("/wallets") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Wallets
+                  <Link
+                    href='/auth/login'
+                    className={pathname === "/auth/login" ? "active-page" : ""}
+                  >
+                    <Icon icon='solar:login-2-outline' className='menu-icon' />
+                    <span>Sign in to access ZapEx</span>
                   </Link>
                 </li>
-                <li>
-                  <Link href='/kyc/submit' className={isActive("/kyc") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC
-                  </Link>
+              </>
+            )}
+            {isAdmin ? (
+              <>
+                <li className='menu-title text-uppercase text-muted small mt-3'>
+                  Admin
                 </li>
-                <li>
-                  <Link href='/trading/markets' className={isActive("/trading") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trading
+                <li className='dropdown'>
+                  <Link href='#'>
+                    <Icon icon='solar:shield-user-outline' className='menu-icon' />
+                    <span>Console</span>
                   </Link>
+                  <ul className='sidebar-submenu'>
+                    <li>
+                      <Link href='/admin/dashboard' className={isActive("/admin/dashboard") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Admin Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/users' className={isActive("/admin/users") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Users
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/kyc/queue' className={isActive("/admin/kyc") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC Queue
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/wallets' className={isActive("/admin/wallets") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Wallets
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/trades' className={isActive("/admin/trades") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trades
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/payments' className={isActive("/admin/payments") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Payments
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/settings' className={isActive("/admin/settings") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/admin/audit-logs' className={isActive("/admin/audit-logs") ? "active-page" : ""}>
+                        <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Audit Logs
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
-                <li>
-                  <Link href='/profile' className={isActive("/profile") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/security' className={isActive("/security") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Security
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/activity' className={isActive("/activity") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Activity
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li className='menu-title text-uppercase text-muted small mt-3'>
-              Admin
-            </li>
-            <li className='dropdown'>
-              <Link href='#'>
-                <Icon icon='solar:shield-user-outline' className='menu-icon' />
-                <span>Console</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-                <li>
-                  <Link href='/admin/dashboard' className={isActive("/admin/dashboard") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Admin Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/users' className={isActive("/admin/users") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Users
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/kyc/queue' className={isActive("/admin/kyc") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-success-600 w-auto' /> KYC Queue
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/wallets' className={isActive("/admin/wallets") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' /> Wallets
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/trades' className={isActive("/admin/trades") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-danger-600 w-auto' /> Trades
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/payments' className={isActive("/admin/payments") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-info-600 w-auto' /> Payments
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/settings' className={isActive("/admin/settings") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' /> Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/admin/audit-logs' className={isActive("/admin/audit-logs") ? "active-page" : ""}>
-                    <i className='ri-circle-fill circle-icon text-secondary-600 w-auto' /> Audit Logs
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              </>
+            ) : null}
 
             <li className='sidebar-menu-group-title'>Application</li>
             <li>
