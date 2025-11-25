@@ -471,7 +471,7 @@ export const ZapexProvider = ({ children }) => {
     [transactions, currentUser]
   );
 
-  const value = useMemo(() => ({
+  const value = {
     currentUser,
     users,
     wallets,
@@ -497,33 +497,7 @@ export const ZapexProvider = ({ children }) => {
     addTrade,
     updateSettings,
     setPayments,
-  }), [
-    currentUser,
-    users,
-    wallets,
-    userTransactions,
-    orders,
-    trades,
-    markets,
-    kycQueue,
-    auditLogs,
-    payments,
-    settings,
-    login,
-    logout,
-    register,
-    updateProfile,
-    submitKyc,
-    updateKycStatus,
-    setUserRole,
-    toggleUserStatus,
-    recordTransaction,
-    placeOrder,
-    cancelOrder,
-    addTrade,
-    updateSettings,
-    setPayments,
-  ]);
+  };
 
   return <ZapexContext.Provider value={value}>{children}</ZapexContext.Provider>;
 };
