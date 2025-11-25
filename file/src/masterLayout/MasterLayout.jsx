@@ -80,7 +80,12 @@ const MasterLayout = ({ children }) => {
         trigger.removeEventListener("click", handleDropdownClick);
       });
     };
-  }, [location.pathname]);
+  }, [location]);
+
+  useEffect(() => {
+    seSidebarActive(false);
+    setMobileMenu(false);
+  }, [location]);
 
   let sidebarControl = () => {
     seSidebarActive(!sidebarActive);
