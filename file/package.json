@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
@@ -62,8 +62,8 @@
   },
   "devDependencies": {
     "@iconify/react": "^5.0.2",
-    "eslint": "^9.39.1",
-    "eslint-config-next": "^16.0.4",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.5.6",
     "webpack": "^5.90.3"
   }
 }
