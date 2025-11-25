@@ -153,8 +153,8 @@ const MasterLayout = ({ children }) => {
               <ul className='sidebar-submenu'>
                 <li>
                   <Link
-                    href='/'
-                    className={pathname === "/" ? "active-page" : ""}
+                    href='/zapex'
+                    className={isActive("/zapex") ? "active-page" : ""}
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />
                     ZapEx Flow
