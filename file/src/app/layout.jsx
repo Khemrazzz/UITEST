@@ -1,5 +1,4 @@
 import PluginInit from "@/helper/PluginInit";
-import ZapexProviders from "@/components/zapex/context/ZapexProviders";
 import "./font.css";
 import "./globals.css";
 
@@ -14,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <PluginInit />
       <body suppressHydrationWarning={true}>
-        <ZapexProviders>{children}</ZapexProviders>
+        {children}
       </body>
     </html>
   );
